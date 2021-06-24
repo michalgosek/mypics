@@ -2,6 +2,7 @@ package com.example.mypics.authentication;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -16,10 +17,14 @@ public class ApplicationUser implements UserDetails {
         return grantedAuthorities;
     }
 
-    @Override
-    public String getPassword() {
-        return user.getPassword();
+    public Long getId() { return user.getId(); }
+
+    public boolean hasUserRoleAssigned() {
+        return getAuthorities().contains(new SimpleGrantedAuthority(UserRole.ROLE_USER.name()));
     }
+
+    @Override
+    public String getPassword() { return user.getPassword(); }
 
     @Override
     public String getUsername() {
@@ -44,5 +49,9 @@ public class ApplicationUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return user.isEnabled();
+    }
+
+    public String getEmail() {
+        return user.getEmail();
     }
 }
