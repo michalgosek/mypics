@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="greeting-header">
+    <header sec:authorize="isAuthenticated()">
+        <div class="container">
+            <h1 class="display-2">Hello <p sec:authentication="name"></p></h1>
+        </div>
+    </header>
+</div>
+</html>
+
+
+
+
+
+
+
